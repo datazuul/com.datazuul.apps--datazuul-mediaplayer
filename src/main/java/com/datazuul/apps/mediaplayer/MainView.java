@@ -117,7 +117,7 @@ public class MainView extends JFrame {
     setTitle("Music Player - Java - 1.0");
     int _H = 300;
     int _W = 430;
-    setSize(_W, _H);
+    setSize(_W, _H + 70);
     setLocationRelativeTo(null);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     //setResizable(false);
@@ -168,7 +168,7 @@ public class MainView extends JFrame {
     //jSongList.setBounds(0, line1+50, _W, h_list);
     JScrollPane listScroller = new JScrollPane(jSongList);
     listScroller.setPreferredSize(new Dimension(_W - 10, h_list));
-    listScroller.setBounds(0, line1 + 50, _W - 10, h_list);
+    listScroller.setBounds(5, line1 + 50, _W - 10, h_list);
     container.add(listScroller);
     //container.add(jSongList);
     //2Row Buttons
@@ -218,7 +218,7 @@ public class MainView extends JFrame {
 
       @Override
       public String getDescription() {
-        return "only supported audio files (mp3, wav)";
+        return "only supported audio files (mp3, ogg, wav)";
       }
 
       @Override
@@ -227,6 +227,9 @@ public class MainView extends JFrame {
           return true;
         }
         if (f.getName().endsWith(".mp3")) {
+          return true;
+        }
+        if (f.getName().endsWith(".ogg")) {
           return true;
         }
         if (f.getName().endsWith(".wav")) {

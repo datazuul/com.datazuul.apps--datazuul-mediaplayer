@@ -80,8 +80,21 @@ public class AudioPlayer extends BasicPlayer {
         //Set Audio Properties
         File file = new File(playlist.get(index));
         long audioFileLength = file.length();
-        int frameSize = (int) properties.get("mp3.framesize.bytes");
-        float frameRate = (float) properties.get("mp3.framerate.fps");
+        int frameSize;
+        float frameRate;
+        String audioType = (String) properties.get("audio.type");
+        switch (audioType) {
+          case "MP3":
+            frameSize = (int) properties.get("mp3.framesize.bytes");
+            frameRate = (float) properties.get("mp3.framerate.fps");
+            break;
+          case "OGG":
+            frameSize = (int) properties.get("audio.framesize.bytes");
+            frameRate = (float) properties.get("audio.framerate.fps");
+            break;
+          default:
+            throw new UnsupportedOperationException("Invalid file format");
+        }
         audioFrameSize = frameSize;
         audioFrameRate = frameRate;
         audioDurationInSeconds = (audioFileLength / (frameSize * frameRate));
